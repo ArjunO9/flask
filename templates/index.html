@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Dynamic Page</title>
+    <!-- Link to CSS file in static folder -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+    <!--url_for() automatically generates the correct URL in any environment.-->
+</head>
+<body>
+    <!-- Display dynamic message from Flask -->
+    <h1>{{ msg }}</h1>
+
+    <!-- Display a list of technologies dynamically -->
+    {% if tech_list %}
+        <h2>Technologies:</h2>
+        <ul>
+            {% for tech in tech_list %}
+                <li>{{ tech }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Form to take user input -->
+    <form action="/greet" method="POST">
+        <input type="text" name="username" placeholder="Enter your name" required>
+        <button type="submit">Greet Me</button>
+    </form>
+</body>
+</html>
