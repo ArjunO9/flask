@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Data — CSV Display</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('form') }}">Form</a>
+      <a href="{{ url_for('data_page') }}">Data</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>Product Data (from CSV)</h1>
+
+    {% if products %}
+      <table class="data-table">
+        <thead>
+          <tr>
+            {% for key in products[0].keys() %}
+              <th>{{ key }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in products %}
+            <tr>
+              {% for v in p.values() %}
+                <td>{{ v }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No product data found. Put a file named <code>data.csv</code> in the project root with headers.</p>
+    {% endif %}
+  </main>
+
+  <footer class="footer">
+    <p>CSV-driven data table</p>
+  </footer>
+</body>
+</html>

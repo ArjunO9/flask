@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Form — Flask Demo</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('form') }}">Form</a>
+      <a href="{{ url_for('data_page') }}">Data</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>Submit Your Info</h1>
+
+    <form method="post" action="{{ url_for('form') }}" class="form-box">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your name" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+      <label for="number">Numeric Value</label>
+      <input id="number" name="number" type="number" step="any" placeholder="Enter a number" required>
+
+      <div class="form-actions">
+        <button type="submit">Submit (POST)</button>
+      </div>
+    </form>
+
+    {% if has_submission %}
+    <section class="submitted">
+      <h2>Submitted Data (displayed via GET)</h2>
+      <p><strong>Name:</strong> {{ submitted.name }}</p>
+      <p><strong>Email:</strong> {{ submitted.email }}</p>
+      <p><strong>Number:</strong> {{ submitted.number }}</p>
+      <p class="note">Note: The POST redirected to a GET with query params to display the data.</p>
+    </section>
+    {% endif %}
+
+  </main>
+
+  <footer class="footer">
+    <p>Form demo • Flask</p>
+  </footer>
+</body>
+</html>
